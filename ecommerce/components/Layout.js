@@ -34,7 +34,7 @@ const Layout = ({children}) => {
       <Flex flex={{base:1}} justify={{base:'center', md: 'start'}}> 
         <Text 
         fontFamily={'heading'} 
-        color={useColorModeValue('gray.800', 'white')}>Logo
+        color={useColorModeValue('gray.800', 'white')}>E-commerce App
         </Text>
       </Flex> 
         <Stack

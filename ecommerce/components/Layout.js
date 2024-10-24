@@ -5,11 +5,13 @@ import {
     Text,
     Stack,
     Button,
-    useColorModeValue
+    useColorModeValue,
+    useColorMode
 } from '@chakra-ui/react'
-
+import {MoonIcon, SunIcon} from '@chakra-ui/icons'
 
 const Layout = ({children}) => {
+    const {colorMode, toggleColorMode} = useColorMode() // Hook chakra-ui para poder cambiar de tema claro a oscuro
   return (
     <div>
     <Head>
@@ -41,6 +43,9 @@ const Layout = ({children}) => {
          direction={'row'}
          spacing={6}
         >
+        <Button onClick={toggleColorMode}>
+         {colorMode === "light" ? <MoonIcon/> : <SunIcon/>  }
+      </Button>
           <Button
             fontSize={'sm'}
             fontWeight={400}

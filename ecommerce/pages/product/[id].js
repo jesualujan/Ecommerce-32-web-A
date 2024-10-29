@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { data } from '../../utils/data'
+// import { data } from '../../utils/data'
+import db from '../../utils/db'
 import {
     Container,
     SimpleGrid,
@@ -13,11 +14,12 @@ import {
     useColorModeValue,
     Button
 } from '@chakra-ui/react'
+import Product from '../../models/Products'
 
-const ProductPage = () => {
+const ProductPage = (props) => {
     const router = useRouter() // es un hook de next, me va permitir a mi moverme entre rutas
     const {id} = router.query
-    const product = data.products.find((product) => product.id === parseInt(id))
+    const {product} = props
     if (!product) {
         return <div>Product not found</div>
     }
@@ -81,4 +83,26 @@ const ProductPage = () => {
   )
 }
 
+//Server-side proxy
+// reenviar las solicitudes del cliente a los servidores correspondientes
+// y luego devolver las respuestas de esos servidores al cliente.
+
+export async function getServerSideProps(context){
+    // Extrae los datos/parámetros de la URL desde el contexto 
+    const {params} = context
+    const {id} = params
+    // conecta a la base datos
+    await db.connect()
+    //Busca un producto en la base de datos con el id proporcionado y lo convierte a un objeto de Javascript
+    const product = await Product.findOne({id}).lean()
+    // desconecta de la base de datos
+    await db.disconnect()
+   // devuelve el producto encontrado, como props para ser usado en el componente de la página
+    return {
+        props: {
+            product: db.convertDocToObj(product)
+        }
+    }
+
+}
 export default ProductPage

@@ -34,9 +34,19 @@ async function disconnect() {
     }
 }
 
+// tranformar documentos (o registros) en objetos en el contexto de bases de datos.
+function convertDocToObj(doc){
+    doc._id = doc._id.toString() // Convierte un valor de la propiedad "id" a una cadena 
+    //timeStamp
+    doc.createdAt = doc.createdAt.toString() // Convierte el valor de la propiedad "createdAt" a una cadena
+    doc.updatedAt = doc.updatedAt.toString() // Convierte el valor de la propiedad "updatedAt" a una cadena
+    return doc // devuelve el objeto modificado
+}
+
 const db = { 
     connect,
-    disconnect
+    disconnect,
+    convertDocToObj
 }
 
 export default db

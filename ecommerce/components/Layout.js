@@ -9,6 +9,7 @@ import {
     useColorMode
 } from '@chakra-ui/react'
 import {MoonIcon, SunIcon} from '@chakra-ui/icons'
+import CartIcon from './CartIcon'
 
 const Layout = ({children}) => {
     const {colorMode, toggleColorMode} = useColorMode() // Hook chakra-ui para poder cambiar de tema claro a oscuro
@@ -43,6 +44,7 @@ const Layout = ({children}) => {
          direction={'row'}
          spacing={6}
         >
+          <CartIcon/>
         <Button onClick={toggleColorMode}>
          {colorMode === "light" ? <MoonIcon/> : <SunIcon/>  }
       </Button>

@@ -76,8 +76,6 @@ const ProductPage = (props) => {
                     </Button>
                 </Flex>
             </Stack>
-
-
         </SimpleGrid>
     </Container>
   )
@@ -98,11 +96,10 @@ export async function getServerSideProps(context){
     // desconecta de la base de datos
     await db.disconnect()
    // devuelve el producto encontrado, como props para ser usado en el componente de la página
-    return {
-        props: {
-            product: db.convertDocToObj(product)
-        }
+   return {
+    props: {
+      product: db.convertDocToObj(product)
     }
-
+  }
 }
 export default ProductPage

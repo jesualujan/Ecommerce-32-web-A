@@ -1,6 +1,6 @@
 //? useReducer es un hook que nos permite manejar el estado de un 
 //? componente de manera más eficiente.
-import React, { useReducer, createContext, Children} from 'react'
+import React, { useReducer, createContext} from 'react'
 
 // para este ejemplo vamos a usar un reducer para manejar el estado del carrito
 
@@ -56,15 +56,9 @@ const cartReducer = (state, action) => {
     }
 
     return (
-        <CartContext.Provider
-         value={
-            {
-                state,
-                addToCart,
-                removeFromCart
-            }
-         }
-        >
+        // value paso los datos que quiero compartir con otros componentes 
+        <CartContext.Provider value={{...state,addToCart,removeFromCart}}>
+            {/* componentes hijos*/}
             {children}
         </CartContext.Provider>
     )
